@@ -19,4 +19,5 @@ appstream --v=10
 ```
 
 Now open the following url:
-http://127.0.0.1:50066/api/apps/v1beta1/metadata/git
+##### Docker
+http://127.0.0.1:50066/api/apps/v1beta1/metadata/docker?name=appscode/kubed
