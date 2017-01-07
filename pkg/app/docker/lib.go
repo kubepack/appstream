@@ -1,14 +1,11 @@
 package docker
 
 import (
-	//"github.com/docker/distribution/digest"
-	//"github.com/docker/distribution/manifest"
-	//"github.com/docker/libtrust"
 	api "github.com/appscode/appstream/pkg/apis/app/v1beta1"
 	"github.com/heroku/docker-registry-client/registry"
 )
 
-func GetMetdata(name, reg string) (*api.DockerMetadata, error) {
+func GetMetadata(name, reg string) (*api.DockerMetadata, error) {
 	url := "https://registry-1.docker.io/"
 	username := "" // anonymous
 	password := "" // anonymous

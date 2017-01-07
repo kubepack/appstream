@@ -1,5 +1,5 @@
 hash: d94446bddc08e544af341b423fb37a778d7e0d3e99bd52a4a614d17e24544f60
-updated: 2017-01-07T03:12:37.850312384-08:00
+updated: 2017-01-07T04:41:49.356435482-08:00
 imports:
 - name: github.com/appscode/api
   version: 3ba3c83788ce153e2d34cd81235aee1504395142
@@ -21,6 +21,18 @@ imports:
   version: 68e0e42e42c01371f3950571fc87c2298a51dd8f
   subpackages:
   - golog
+- name: github.com/docker/distribution
+  version: 99cb7c0946d2f5a38015443e515dc916295064d7
+  subpackages:
+  - context
+  - digest
+  - manifest
+  - manifest/schema1
+  - manifest/schema2
+  - reference
+  - uuid
+- name: github.com/docker/libtrust
+  version: aabc10ec26b754e797f9028f4589c5b7bd90dc20
 - name: github.com/facebookgo/stack
   version: d9d227395bc3d7a635388c75b2e3b3a750e11888
 - name: github.com/golang/glog
@@ -32,6 +44,10 @@ imports:
   - proto
   - protoc-gen-go/descriptor
   - ptypes/any
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: 0a192a193177452756c362c20087ddafcf6829c4
 - name: github.com/grpc-ecosystem/grpc-gateway
   version: 24187bf5b5f6731e0915842f78ddf4ef3941faa3
   repo: git@github.com:appscode/grpc-gateway.git
@@ -44,6 +60,8 @@ imports:
   - utilities
 - name: github.com/heroku/docker-registry-client
   version: 36bd5f538a6b9e70f2d863c9a8f6bf955a98eddc
+  subpackages:
+  - registry
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/mikespook/golib
@@ -52,27 +70,52 @@ imports:
   - autoinc
   - idgen
   - signal
+- name: github.com/sergi/go-diff
+  version: 83532ca1c1caa393179c677b6facf48e61f4ca5d
+  subpackages:
+  - diffmatchpatch
+- name: github.com/Sirupsen/logrus
+  version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
 - name: github.com/soheilhy/cmux
   version: bf4a8ede9e87c006fe1d4278c6c7f2b8be1fa84c
 - name: github.com/spf13/cobra
   version: f62e98d28ab7ad31d707ba837a966378465c7b57
 - name: github.com/spf13/pflag
   version: 5ccb023bc27df288a957c5e994cd44fd19619465
+- name: github.com/src-d/gcfg
+  version: f187355171c936ac84a82793659ebb4936bc1c23
+  subpackages:
+  - scanner
+  - token
+  - types
 - name: github.com/xeipuuv/gojsonpointer
   version: e0fe6f68307607d540ed8eac07a342c33fa1b54a
 - name: github.com/xeipuuv/gojsonreference
   version: e02fc20de94c78484cd5ffb007f8af96be030a45
 - name: github.com/xeipuuv/gojsonschema
   version: 93e72a773fade158921402d6a24c819b48aba29d
+- name: golang.org/x/crypto
+  version: c10c31b5e94b6f7a0283272dc2bb27163dcea24b
+  subpackages:
+  - bcrypt
+  - blowfish
+  - ocsp
+  - ssh
+  - ssh/agent
 - name: golang.org/x/net
-  version: e90d6d0afc4c315a0d87a568ae68577cc15149a0
+  version: a333c534c871727fb95745870e8b98a69447f2ce
   subpackages:
   - context
   - http2
   - http2/hpack
+  - idna
   - internal/timeseries
   - lex/httplex
   - trace
+- name: golang.org/x/sys
+  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  subpackages:
+  - unix
 - name: google.golang.org/grpc
   version: 708a7f9f3283aa2d4f6132d287d78683babe55c8
   subpackages:
@@ -93,6 +136,39 @@ imports:
   - internal/json
 - name: gopkg.in/src-d/go-git.v4
   version: ff449c6a58ef0d7416083f0dca67f49b591f9628
+  subpackages:
+  - config
+  - plumbing
+  - plumbing/format/config
+  - plumbing/format/idxfile
+  - plumbing/format/index
+  - plumbing/format/objfile
+  - plumbing/format/packfile
+  - plumbing/format/pktline
+  - plumbing/object
+  - plumbing/protocol/packp
+  - plumbing/protocol/packp/capability
+  - plumbing/protocol/packp/sideband
+  - plumbing/storer
+  - plumbing/transport
+  - plumbing/transport/client
+  - plumbing/transport/file
+  - plumbing/transport/git
+  - plumbing/transport/http
+  - plumbing/transport/internal/common
+  - plumbing/transport/ssh
+  - storage/filesystem
+  - storage/filesystem/internal/dotgit
+  - storage/memory
+  - utils/binary
+  - utils/diff
+  - utils/ioutil
+- name: gopkg.in/warnings.v0
+  version: 8a331561fe74dadba6edfc59f3be66c22c3b065d
+- name: srcd.works/go-billy.v1
+  version: 6ca1fd6ba86f5929a23633719f5fd413a0046998
+  subpackages:
+  - os
 testImports:
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
