@@ -49,7 +49,7 @@ from os.path import expandvars
 libbuild.REPO_ROOT = expandvars('$GOPATH') + '/src/github.com/appscode/appstream'
 BUILD_METADATA = libbuild.metadata(libbuild.REPO_ROOT)
 libbuild.BIN_MATRIX = {
-    'seed': {
+    'appstream': {
         'type': 'go',
         'go_version': True,
         'distro': {

@@ -2,7 +2,7 @@
 Description=Provide 3D(Git, Docker, Helm) App API
 
 [Service]
-ExecStart=/usr/bin/appstream --api-port=80 --v=3
+ExecStart=/usr/bin/appstream-linux-amd64 --api-port=80 --v=3
 Restart=always
 RestartSec=5
 
