@@ -18,8 +18,8 @@ Run the server, by running:
 appstream --v=10
 ```
 
-Now open the following url:
-#### Git
-http://appscode.stream/api/apps/v1beta1/metadata/git?name=https://github.com/src-d/go-git
-#### Docker
-http://appscode.stream/api/apps/v1beta1/metadata/docker?name=appscode/kubed
+Now open the url: http://127.0.0.1:50066/api/apps/v1beta1/metadata/docker?name=appscode/kubed
+
+## Hosted Service
+* Git: http://appscode.stream/api/apps/v1beta1/metadata/git?name=https://github.com/src-d/go-git
+* Docker: http://appscode.stream/api/apps/v1beta1/metadata/docker?name=appscode/kubed
