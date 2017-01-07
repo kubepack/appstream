@@ -7,15 +7,22 @@ import (
 	"github.com/xeipuuv/gojsonschema"
 )
 
-var gitRequestSchema *gojsonschema.Schema
-var dockerRequestSchema *gojsonschema.Schema
+var metadataGetRequestSchema *gojsonschema.Schema
 
 func init() {
 	var err error
-	gitRequestSchema, err = gojsonschema.NewSchema(gojsonschema.NewStringLoader(`{
+	metadataGetRequestSchema, err = gojsonschema.NewSchema(gojsonschema.NewStringLoader(`{
   "$schema": "http://json-schema.org/draft-04/schema#",
   "properties": {
     "name": {
+      "maxLength": 63,
+      "pattern": "^[a-z0-9](?:[a-z0-9\\-]{0,61}[a-z0-9])?$",
+      "type": "string"
+    },
+    "registry": {
+      "type": "string"
+    },
+    "type": {
       "type": "string"
     }
   },
@@ -24,33 +31,13 @@ func init() {
 	if err != nil {
 		glog.Fatal(err)
 	}
-	dockerRequestSchema, err = gojsonschema.NewSchema(gojsonschema.NewStringLoader(`{
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "properties": {
-    "name": {
-      "type": "string"
-    }
-  },
-  "type": "object"
-}`))
-	if err != nil {
-		glog.Fatal(err)
-	}
 }
 
-func (m *GitRequest) IsValid() (*gojsonschema.Result, error) {
-	return gitRequestSchema.Validate(gojsonschema.NewGoLoader(m))
+func (m *MetadataGetRequest) IsValid() (*gojsonschema.Result, error) {
+	return metadataGetRequestSchema.Validate(gojsonschema.NewGoLoader(m))
 }
-func (m *GitRequest) IsRequest() {}
+func (m *MetadataGetRequest) IsRequest() {}
 
-func (m *DockerRequest) IsValid() (*gojsonschema.Result, error) {
-	return dockerRequestSchema.Validate(gojsonschema.NewGoLoader(m))
-}
-func (m *DockerRequest) IsRequest() {}
-
-func (m *GitResponse) SetStatus(s *dtypes.Status) {
-	m.Status = s
-}
-func (m *DockerResponse) SetStatus(s *dtypes.Status) {
+func (m *MetadataGetResponse) SetStatus(s *dtypes.Status) {
 	m.Status = s
 }

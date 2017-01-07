@@ -16,14 +16,8 @@ type MetadataServer struct{}
 
 var _ api.MetadataServer = &MetadataServer{}
 
-func (*MetadataServer) Git(ctx context.Context, req *api.GitRequest) (*api.GitResponse, error) {
-	resp := &api.GitResponse{}
-	resp.Status = serverutil.NewStatusOK()
-	return resp, nil
-}
-
-func (*MetadataServer) Docker(ctx context.Context, req *api.DockerRequest) (*api.DockerResponse, error) {
-	resp := &api.DockerResponse{}
+func (*MetadataServer) Get(ctx context.Context, req *api.MetadataGetRequest) (*api.MetadataGetResponse, error) {
+	resp := &api.MetadataGetResponse{}
 	resp.Status = serverutil.NewStatusOK()
 	return resp, nil
 }

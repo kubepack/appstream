@@ -15,7 +15,6 @@ import "github.com/grpc-ecosystem/grpc-gateway/runtime"
 // Metadata service to enable CORS.
 func ExportMetadataCorsPatterns() []runtime.Pattern {
 	return []runtime.Pattern{
-		pattern_Metadata_Git_0,
-		pattern_Metadata_Docker_0,
+		pattern_Metadata_Get_0,
 	}
 }

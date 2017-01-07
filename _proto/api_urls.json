@@ -1,14 +1,8 @@
 {
-  "/api/apps/v1beta1/metadata/docker": {
+  "/api/apps/v1beta1/metadata/*": {
     "get": {
       "file": "/app/v1beta1/metdata.proto",
-      "url": "/api/apps/v1beta1/metadata/docker"
-    }
-  },
-  "/api/apps/v1beta1/metadata/git": {
-    "get": {
-      "file": "/app/v1beta1/metdata.proto",
-      "url": "/api/apps/v1beta1/metadata/git"
+      "url": "/api/apps/v1beta1/metadata/{type}"
     }
   }
 }

@@ -13,17 +13,9 @@ import "appscode/api/annotations.proto";
 import "appscode/api/dtypes/types.proto";
 
 service Metadata {
-    rpc Git(GitRequest) returns(GitResponse) {
+    rpc Get(MetadataGetRequest) returns(MetadataGetResponse) {
         option(google.api.http) = {
-            get: "/api/apps/v1beta1/metadata/git"
-        };
-        option (appscode.api.cors) = {
-            enable: true
-        };
-    }
-    rpc Docker(DockerRequest) returns(DockerResponse) {
-        option(google.api.http) = {
-            get: "/api/apps/v1beta1/metadata/docker"
+            get: "/api/apps/v1beta1/metadata/{type}"
         };
         option (appscode.api.cors) = {
             enable: true
@@ -31,20 +23,27 @@ service Metadata {
     }
 }
 
-message GitRequest {
+message MetadataGetRequest {
     string name = 1;
+    string type = 2;
+    string registry = 3;
 }
 
-message GitResponse {
+message MetadataGetResponse {
     dtypes.Status status = 1;
-    string greetings = 2;
+    oneof metdata {
+        GitMetadata git = 2;
+        DockerMetadata docker = 3;
+    }
 }
 
-message DockerRequest {
+message GitMetadata {
     string name = 1;
+    repeated string branches = 2;
+    repeated string tags = 3;
 }
 
-message DockerResponse {
-    dtypes.Status status = 1;
-    string greetings = 2;
+message DockerMetadata {
+    string name = 1;
+    repeated string tags = 2;
 }

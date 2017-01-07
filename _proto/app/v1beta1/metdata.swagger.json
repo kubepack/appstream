@@ -68,41 +68,69 @@
       },
       "type": "object"
     },
-    "v1beta1DockerRequest": {
+    "v1beta1DockerMetadata": {
       "properties": {
         "name": {
-          "format": "string",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "v1beta1DockerResponse": {
-      "properties": {
-        "greetings": {
           "format": "string",
           "type": "string"
         },
-        "status": {
-          "$ref": "#/definitions/dtypesStatus"
+        "tags": {
+          "items": {
+            "format": "string",
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
     },
-    "v1beta1GitRequest": {
+    "v1beta1GitMetadata": {
+      "properties": {
+        "branches": {
+          "items": {
+            "format": "string",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "format": "string",
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "format": "string",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1beta1MetadataGetRequest": {
       "properties": {
         "name": {
           "format": "string",
           "type": "string"
+        },
+        "registry": {
+          "format": "string",
+          "type": "string"
+        },
+        "type": {
+          "format": "string",
+          "type": "string"
         }
       },
       "type": "object"
     },
-    "v1beta1GitResponse": {
+    "v1beta1MetadataGetResponse": {
       "properties": {
-        "greetings": {
-          "format": "string",
-          "type": "string"
+        "docker": {
+          "$ref": "#/definitions/v1beta1DockerMetadata"
+        },
+        "git": {
+          "$ref": "#/definitions/v1beta1GitMetadata"
         },
         "status": {
           "$ref": "#/definitions/dtypesStatus"
@@ -117,30 +145,23 @@
     "version": "1beta1"
   },
   "paths": {
-    "/api/apps/v1beta1/metadata/docker": {
+    "/api/apps/v1beta1/metadata/{type}": {
       "get": {
-        "operationId": "Docker",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/v1beta1DockerResponse"
-            }
+        "operationId": "Get",
+        "parameters": [
+          {
+            "format": "string",
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "type": "string"
           }
-        },
-        "tags": [
-          "Metadata"
-        ]
-      }
-    },
-    "/api/apps/v1beta1/metadata/git": {
-      "get": {
-        "operationId": "Git",
+        ],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/v1beta1GitResponse"
+              "$ref": "#/definitions/v1beta1MetadataGetResponse"
             }
           }
         },
