@@ -40,20 +40,19 @@ func (s *apiServer) ListenAndServe() {
 	}
 
 	m := cmux.New(l)
-
-	// We first match the connection against HTTP2 fields. If matched, the
-	// connection will be sent through the "grpcl" listener.
-	grpcl := m.MatchWithWriters(cmux.HTTP2MatchHeaderFieldSendSettings("content-type", "application/grpc"))
-	// Otherwise, we match it againts HTTP1 methods. If matched,
-	// it is sent through the "httpl" listener.
-	httpl := m.Match(cmux.Any())
-
-	// Then we used the muxed listeners.
-	go s.ServeGRPC(grpcl)
 	if s.CACertFile == "" && s.CertFile == "" && s.KeyFile == "" {
+		grpcl := m.MatchWithWriters(cmux.HTTP2MatchHeaderFieldSendSettings("content-type", "application/grpc"))
+		httpl := m.Match(cmux.Any())
+
+		go s.ServeGRPC(grpcl)
 		go s.ServeHTTP(httpl)
 	} else {
-		go s.ServeHTTPS(httpl)
+		grpcl := m.MatchWithWriters(cmux.HTTP2MatchHeaderFieldSendSettings("content-type", "application/grpc"))
+		tlsl := m.Match(cmux.Any())
+
+		go s.ServeGRPC(grpcl)
+		go s.RedirectToHTTPS()
+		go s.ServeHTTPS(tlsl)
 	}
 
 	log.Fatalln(m.Serve())
@@ -87,6 +86,21 @@ func (s *apiServer) ServeHTTP(l net.Listener) {
 		Handler:      s.ProxyMux,
 	}
 	log.Fatalln("[PROXYSERVER] Proxy Server failed:", srv.Serve(l))
+}
+
+func (s *apiServer) RedirectToHTTPS() {
+	defer runtime.HandleCrash()
+	log.Infoln("[REDIRECTOR] Sarting Redirector Server")
+	srv := &http.Server{
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 5 * time.Second,
+		Handler: http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+			w.Header().Set("Connection", "close")
+			url := "https://" + req.Host + req.URL.String()
+			http.Redirect(w, req, url, http.StatusMovedPermanently)
+		}),
+	}
+	log.Fatalln("[REDIRECTOR] Redirector Server failed:", srv.ListenAndServe())
 }
 
 func (s *apiServer) ServeHTTPS(l net.Listener) {
