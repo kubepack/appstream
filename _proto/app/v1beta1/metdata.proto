@@ -40,7 +40,8 @@ message MetadataGetResponse {
 message GitMetadata {
     string name = 1;
     repeated string branches = 2;
-    repeated string tags = 3;
+    repeated string notes = 3;
+    repeated string tags = 4;
 }
 
 message DockerMetadata {

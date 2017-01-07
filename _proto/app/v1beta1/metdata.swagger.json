@@ -97,6 +97,13 @@
           "format": "string",
           "type": "string"
         },
+        "notes": {
+          "items": {
+            "format": "string",
+            "type": "string"
+          },
+          "type": "array"
+        },
         "tags": {
           "items": {
             "format": "string",
