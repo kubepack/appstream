@@ -7,12 +7,14 @@ Package v1beta1 is a generated protocol buffer package.
 
 It is generated from these files:
 	metdata.proto
+	version.proto
 
 It has these top-level messages:
 	MetadataGetRequest
 	MetadataGetResponse
 	GitMetadata
 	DockerMetadata
+	VersionGetResponse
 */
 package v1beta1
 

@@ -10,7 +10,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ALIAS="Mgoogle/api/annotations.proto=github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/google/api,"
 ALIAS+="Mappscode/api/annotations.proto=github.com/grpc-ecosystem/grpc-gateway/third_party/appscodeapis/appscode/api,"
-ALIAS+="Mappscode/api/dtypes/types.proto=github.com/appscode/api/dtypes"
+ALIAS+="Mappscode/api/dtypes/types.proto=github.com/appscode/api/dtypes,"
+ALIAS+="Mappscode/api/version/version.proto=github.com/appscode/api/version"
 
 clean() {
 	(find . | grep pb.go | xargs rm) || true

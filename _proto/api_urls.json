@@ -4,5 +4,11 @@
       "file": "/app/v1beta1/metdata.proto",
       "url": "/api/apps/v1beta1/metadata/{type}"
     }
+  },
+  "/api/apps/v1beta1/version": {
+    "get": {
+      "file": "/app/v1beta1/version.proto",
+      "url": "/api/apps/v1beta1/version"
+    }
   }
 }

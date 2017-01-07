@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package appscode.apps.v1beta1;
+
+option go_package = "v1beta1";
+
+option java_multiple_files = true;
+option java_outer_classname = "VersionProto";
+option java_package = "com.appscode.api.apps.v1beta1";
+
+import "google/api/annotations.proto";
+import "appscode/api/annotations.proto";
+import "appscode/api/dtypes/types.proto";
+import "appscode/api/version/version.proto";
+
+service Version {
+    rpc Get(dtypes.VoidRequest) returns(VersionGetResponse) {
+        option(google.api.http) = {
+            get: "/api/apps/v1beta1/version"
+        };
+        option (appscode.api.cors) = {
+            enable: true
+        };
+    }
+}
+
+message VersionGetResponse {
+    dtypes.Status status = 1;
+    version.Version version = 2;
+}
