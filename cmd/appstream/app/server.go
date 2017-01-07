@@ -72,8 +72,8 @@ func (s *apiServer) ServeHTTP(l net.Listener) {
 	log.Infoln("[PROXYSERVER] Sarting Proxy Server at port", s.Port)
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", s.Port),
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		ReadTimeout:  30 * time.Second,
+		WriteTimeout: 30 * time.Second,
 		Handler:      s.ProxyMux,
 	}
 	log.Fatalln("[PROXYSERVER] Proxy Server failed:", srv.Serve(l))
