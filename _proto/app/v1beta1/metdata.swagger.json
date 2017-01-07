@@ -68,7 +68,7 @@
       },
       "type": "object"
     },
-    "v1beta1HelloRequest": {
+    "v1beta1DockerRequest": {
       "properties": {
         "name": {
           "format": "string",
@@ -77,7 +77,28 @@
       },
       "type": "object"
     },
-    "v1beta1HelloResponse": {
+    "v1beta1DockerResponse": {
+      "properties": {
+        "greetings": {
+          "format": "string",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/dtypesStatus"
+        }
+      },
+      "type": "object"
+    },
+    "v1beta1GitRequest": {
+      "properties": {
+        "name": {
+          "format": "string",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1beta1GitResponse": {
       "properties": {
         "greetings": {
           "format": "string",
@@ -92,23 +113,39 @@
   },
   "host": "api.appscode.com",
   "info": {
-    "title": "app.proto",
+    "title": "metdata.proto",
     "version": "1beta1"
   },
   "paths": {
-    "/_appscode/api/seed/v1beta1/apps/hello": {
+    "/api/apps/v1beta1/metadata/docker": {
       "get": {
-        "operationId": "Hello",
+        "operationId": "Docker",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/v1beta1HelloResponse"
+              "$ref": "#/definitions/v1beta1DockerResponse"
             }
           }
         },
         "tags": [
-          "Apps"
+          "Metadata"
+        ]
+      }
+    },
+    "/api/apps/v1beta1/metadata/git": {
+      "get": {
+        "operationId": "Git",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/v1beta1GitResponse"
+            }
+          }
+        },
+        "tags": [
+          "Metadata"
         ]
       }
     }

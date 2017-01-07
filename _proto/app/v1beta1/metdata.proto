@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package appscode.apps.v1beta1;
+
+option go_package = "v1beta1";
+
+option java_multiple_files = true;
+option java_outer_classname = "MetadataProto";
+option java_package = "com.appscode.api.apps.v1beta1";
+
+import "google/api/annotations.proto";
+import "appscode/api/annotations.proto";
+import "appscode/api/dtypes/types.proto";
+
+service Metadata {
+    rpc Git(GitRequest) returns(GitResponse) {
+        option(google.api.http) = {
+            get: "/api/apps/v1beta1/metadata/git"
+        };
+        option (appscode.api.cors) = {
+            enable: true
+        };
+    }
+    rpc Docker(DockerRequest) returns(DockerResponse) {
+        option(google.api.http) = {
+            get: "/api/apps/v1beta1/metadata/docker"
+        };
+        option (appscode.api.cors) = {
+            enable: true
+        };
+    }
+}
+
+message GitRequest {
+    string name = 1;
+}
+
+message GitResponse {
+    dtypes.Status status = 1;
+    string greetings = 2;
+}
+
+message DockerRequest {
+    string name = 1;
+}
+
+message DockerResponse {
+    dtypes.Status status = 1;
+    string greetings = 2;
+}

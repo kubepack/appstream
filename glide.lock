@@ -1,5 +1,5 @@
-hash: a947708038aa60751c3a2736360a155af4ec0b4cfd796080232bbf6dcf6f1169
-updated: 2017-01-07T02:28:30.260224351-08:00
+hash: d94446bddc08e544af341b423fb37a778d7e0d3e99bd52a4a614d17e24544f60
+updated: 2017-01-07T03:12:37.850312384-08:00
 imports:
 - name: github.com/appscode/api
   version: 3ba3c83788ce153e2d34cd81235aee1504395142
@@ -21,6 +21,8 @@ imports:
   version: 68e0e42e42c01371f3950571fc87c2298a51dd8f
   subpackages:
   - golog
+- name: github.com/facebookgo/stack
+  version: d9d227395bc3d7a635388c75b2e3b3a750e11888
 - name: github.com/golang/glog
   version: 44145f04b68cf362d9c4df2182967c2275eaefed
 - name: github.com/golang/protobuf
@@ -40,6 +42,8 @@ imports:
   - third_party/appscodeapis/appscode/api
   - third_party/googleapis/google/api
   - utilities
+- name: github.com/heroku/docker-registry-client
+  version: 36bd5f538a6b9e70f2d863c9a8f6bf955a98eddc
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/mikespook/golib
@@ -87,6 +91,8 @@ imports:
   subpackages:
   - bson
   - internal/json
+- name: gopkg.in/src-d/go-git.v4
+  version: ff449c6a58ef0d7416083f0dca67f49b591f9628
 testImports:
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9

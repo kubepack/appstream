@@ -1,0 +1,20 @@
+{
+  "definitions": {
+    "v1beta1DockerRequest": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1beta1GitRequest": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

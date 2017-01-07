@@ -19,6 +19,10 @@ import:
 - package: golang.org/x/net
 - package: google.golang.org/grpc
   version: v1.0.5
+- package: gopkg.in/src-d/go-git.v4
+  version: v4
+- package: github.com/heroku/docker-registry-client
+  version: master
 testImport:
 - package: github.com/stretchr/testify
   version: v1.1.4

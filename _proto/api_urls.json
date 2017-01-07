@@ -1,8 +1,14 @@
 {
-  "/_appscode/api/seed/v1beta1/apps/hello": {
+  "/api/apps/v1beta1/metadata/docker": {
     "get": {
-      "file": "/app/v1beta1/app.proto",
-      "url": "/_appscode/api/seed/v1beta1/apps/hello"
+      "file": "/app/v1beta1/metdata.proto",
+      "url": "/api/apps/v1beta1/metadata/docker"
+    }
+  },
+  "/api/apps/v1beta1/metadata/git": {
+    "get": {
+      "file": "/app/v1beta1/metdata.proto",
+      "url": "/api/apps/v1beta1/metadata/git"
     }
   }
 }

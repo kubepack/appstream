@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/appscode/appstream/cmd/appstream/app"
+	"github.com/appscode/appstream/cmd/appstream/app/options"
+	_ "github.com/appscode/appstream/pkg/app"
 	"github.com/appscode/go/flags"
 	_ "github.com/appscode/go/flags"
 	"github.com/appscode/go/hold"
 	v "github.com/appscode/go/version"
-	"github.com/appscode/appstream/cmd/appstream/app"
-	"github.com/appscode/appstream/cmd/appstream/app/options"
-	_ "github.com/appscode/appstream/pkg/app"
 	logs "github.com/appscode/log/golog"
 	"github.com/spf13/pflag"
 )

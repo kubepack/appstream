@@ -19,4 +19,4 @@ appstream --v=10
 ```
 
 Now open the following url:
-http://127.0.0.1:50066/_appscode/api/seed/v1beta1/apps/hello?name=tamal
+http://127.0.0.1:50066/api/apps/v1beta1/metadata/git
