@@ -1,8 +1,11 @@
 package app
 
 import (
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"net/http"
 	"reflect"
@@ -21,7 +24,10 @@ import (
 )
 
 type apiServer struct {
-	Port int
+	Port       int
+	CACertFile string
+	CertFile   string
+	KeyFile    string
 
 	GRPCServer *grpc.Server
 	ProxyMux   *gwrt.ServeMux
@@ -40,11 +46,15 @@ func (s *apiServer) ListenAndServe() {
 	grpcl := m.MatchWithWriters(cmux.HTTP2MatchHeaderFieldSendSettings("content-type", "application/grpc"))
 	// Otherwise, we match it againts HTTP1 methods. If matched,
 	// it is sent through the "httpl" listener.
-	httpl := m.Match(cmux.HTTP1Fast())
+	httpl := m.Match(cmux.Any())
 
 	// Then we used the muxed listeners.
 	go s.ServeGRPC(grpcl)
-	go s.ServeHTTP(httpl)
+	if s.CACertFile == "" && s.CertFile == "" && s.KeyFile == "" {
+		go s.ServeHTTP(httpl)
+	} else {
+		go s.ServeHTTPS(httpl)
+	}
 
 	log.Fatalln(m.Serve())
 }
@@ -79,12 +89,59 @@ func (s *apiServer) ServeHTTP(l net.Listener) {
 	log.Fatalln("[PROXYSERVER] Proxy Server failed:", srv.Serve(l))
 }
 
+func (s *apiServer) ServeHTTPS(l net.Listener) {
+	// Load certificates.
+	certificate, err := tls.LoadX509KeyPair(s.CertFile, s.KeyFile)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	/*
+		Ref:
+		 - https://blog.cloudflare.com/exposing-go-on-the-internet/
+		 - http://www.bite-code.com/2015/06/25/tls-mutual-auth-in-golang/
+		 - http://www.hydrogen18.com/blog/your-own-pki-tls-golang.html
+	*/
+	tlsConfig := &tls.Config{
+		Certificates:             []tls.Certificate{certificate},
+		PreferServerCipherSuites: true,
+		MinVersion:               tls.VersionTLS12,
+		SessionTicketsDisabled:   true,
+		CipherSuites: []uint16{
+			tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+			tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+			// tls.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305, // Go 1.8 only
+			// tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,   // Go 1.8 only
+			tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+		},
+		ClientAuth: tls.VerifyClientCertIfGiven,
+	}
+	if s.CACertFile != "" {
+		caCert, err := ioutil.ReadFile(s.CACertFile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		caCertPool := x509.NewCertPool()
+		caCertPool.AppendCertsFromPEM(caCert)
+		tlsConfig.ClientCAs = caCertPool
+	}
+
+	// Create TLS listener.
+	tlsl := tls.NewListener(l, tlsConfig)
+
+	// Serve HTTP over TLS.
+	s.ServeHTTP(tlsl)
+}
+
 func Run(cfg *options.Config) {
 	cfgBytes, _ := json.Marshal(cfg)
 	log.Infoln("Configuration:", string(cfgBytes))
 
 	server := &apiServer{
 		Port:       cfg.APIPort,
+		CACertFile: cfg.CACertFile,
+		CertFile:   cfg.CertFile,
+		KeyFile:    cfg.KeyFile,
 		GRPCServer: grpc.NewServer(),
 		ProxyMux:   gwrt.NewServeMux(),
 	}
