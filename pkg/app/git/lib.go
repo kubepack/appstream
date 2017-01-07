@@ -1,7 +1,6 @@
 package git
 
 import (
-	"fmt"
 	"os"
 	"strings"
 
@@ -25,15 +24,6 @@ func GetMetadata(name, reg string) (*api.GitMetadata, error) {
 	})
 	if err != nil {
 		return nil, err
-	}
-
-	list, err := r.Remotes()
-	if err != nil {
-		return nil, err
-	}
-
-	for _, r := range list {
-		fmt.Println(r)
 	}
 
 	err = r.Pull(&git.PullOptions{
