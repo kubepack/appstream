@@ -1,8 +1,8 @@
 package docker
 
 import (
-	api "github.com/appscode/appstream/pkg/apis/app/v1beta1"
 	"github.com/heroku/docker-registry-client/registry"
+	api "github.com/kubepack/appstream/pkg/apis/app/v1beta1"
 )
 
 func GetMetadata(name, reg string) (*api.DockerMetadata, error) {

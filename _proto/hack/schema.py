@@ -16,7 +16,7 @@ from os.path import expandvars
 # Debian package
 # https://gist.github.com/rcrowley/3728417
 
-API_ROOT = expandvars("$GOPATH/src/github.com/appscode/appstream/_proto")
+API_ROOT = expandvars("$GOPATH/src/github.com/kubepack/appstream/_proto")
 VALID_FORMATS = ['date-time',
                  'email',
                  'hostname',
@@ -374,7 +374,7 @@ def generate_url_summary():
     for root, dirnames, filenames in os.walk(API_ROOT):
         for filename in fnmatch.filter(filenames, '*.proto'):
             proto = os.path.join(root, filename)
-            rel_proto = proto[proto.index('github.com/appscode/appstream/_proto') + len('github.com/appscode/appstream/_proto'):]
+            rel_proto = proto[proto.index('github.com/kubepack/appstream/_proto') + len('github.com/kubepack/appstream/_proto'):]
             with open(proto) as f:
                 content = f.read()
                 apis = re.findall(URL_REGREX, content, re.MULTILINE)

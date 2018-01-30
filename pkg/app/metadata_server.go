@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	api "github.com/appscode/appstream/pkg/apis/app/v1beta1"
-	"github.com/appscode/appstream/pkg/apiserver/endpoints"
-	"github.com/appscode/appstream/pkg/app/docker"
-	"github.com/appscode/appstream/pkg/app/git"
-	"github.com/appscode/appstream/pkg/util"
+	api "github.com/kubepack/appstream/pkg/apis/app/v1beta1"
+	"github.com/kubepack/appstream/pkg/apiserver/endpoints"
+	"github.com/kubepack/appstream/pkg/app/docker"
+	"github.com/kubepack/appstream/pkg/app/git"
+	"github.com/kubepack/appstream/pkg/util"
 	"golang.org/x/net/context"
 )
 

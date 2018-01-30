@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	api "github.com/appscode/appstream/pkg/apis/app/v1beta1"
+	api "github.com/kubepack/appstream/pkg/apis/app/v1beta1"
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/config"
 	"gopkg.in/src-d/go-git.v4/plumbing"

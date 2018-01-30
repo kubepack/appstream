@@ -1,4 +1,4 @@
-package: github.com/appscode/appstream
+package: github.com/kubepack/appstream
 import:
 - package: github.com/appscode/api
 - package: github.com/appscode/errors

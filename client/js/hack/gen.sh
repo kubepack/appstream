@@ -9,7 +9,7 @@ ROOT=$DIR/..
 
 rm -rf $ROOT/apis $ROOT/schemas
 
-pushd $GOPATH/src/github.com/appscode/appstream/_proto
+pushd $GOPATH/src/github.com/kubepack/appstream/_proto
 # copy files
 mkdir -p $ROOT/apis $ROOT/schemas
 ./hack/gen.sh js

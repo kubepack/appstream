@@ -13,11 +13,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/appscode/appstream/cmd/appstream/app/options"
-	"github.com/appscode/appstream/pkg/apiserver/endpoints"
 	"github.com/appscode/go/runtime"
 	"github.com/appscode/log"
 	gwrt "github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/kubepack/appstream/cmd/appstream/app/options"
+	"github.com/kubepack/appstream/pkg/apiserver/endpoints"
 	"github.com/soheilhy/cmux"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -169,7 +169,7 @@ func (s *apiServer) ServeHTTPS(l net.Listener) {
 	gwMux := s.newGatewayMux()
 
 	srv := &http.Server{
-		Addr: fmt.Sprintf(":%d", s.Port),
+		Addr:         fmt.Sprintf(":%d", s.Port),
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

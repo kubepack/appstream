@@ -3,10 +3,10 @@ package app
 import (
 	"github.com/appscode/api/dtypes"
 	"github.com/appscode/api/version"
-	api "github.com/appscode/appstream/pkg/apis/app/v1beta1"
-	"github.com/appscode/appstream/pkg/apiserver/endpoints"
-	"github.com/appscode/appstream/pkg/util"
 	v "github.com/appscode/go/version"
+	api "github.com/kubepack/appstream/pkg/apis/app/v1beta1"
+	"github.com/kubepack/appstream/pkg/apiserver/endpoints"
+	"github.com/kubepack/appstream/pkg/util"
 	"golang.org/x/net/context"
 )
 
